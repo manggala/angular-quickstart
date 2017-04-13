@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Navbar } from './navbar.class';
+import { NavbarItem } from './navbar.class';
 
-const navbar: Navbar[] = [
+const navbar: NavbarItem[] = [
 	{ label: 'Hero List', type: 'link', url: '/hero'},
 	{ label: 'Add Hero', type: 'link', url: '/hero'},
 	{ label: 'Hall of Fame', type: 'link', url: '/hero'},
@@ -22,4 +22,3 @@ const navbar: Navbar[] = [
 export class NavbarComponent { 
 	navbars = navbar;
 }
-

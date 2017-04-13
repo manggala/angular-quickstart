@@ -1,24 +1,9 @@
 import { Component } from '@angular/core';
-import { Hero } from './app/hero.class';
-const HEROES: Hero[] = [{
-		id: 1,
-		name: 'WindStorm'
-	},{
-		id: 2,
-		name: 'Magma'
-	},{
-		id: 3,
-		name: 'ElectricMan'
-	},{
-		id: 4,
-		name: 'SharkMaster'
-	},{
-		id: 5,
-		name: 'FireHead'
-	},
-];
+import { Hero } from './hero.class';
+import { HeroService } from './hero.service';
 @Component({
   selector: 'my-app',
+  providers: [HeroService],
   template: `
   	<angular-navbar></angular-navbar>
   	<h1>This is {{ title }}</h1>
@@ -31,22 +16,22 @@ const HEROES: Hero[] = [{
 		   	</ul>
   		</div>
   		<div class="width-half">
-  			<h2>Detail of {{ hero.name }}</h2>
-		  	<div>
-		  		<label>id: </label> {{ hero.id }}
-		  	</div>
-  			<label>name: </label> 
-  			<input [(ngModel)]="hero.name" placeholder="name">
+  			<hero-detail [hero]="hero">
+  			</hero-detail>
   		</div>
   	</div>
   `,
 })
 export class AppComponent  {
 	title = 'Tour of Heroes';
-	heroes = HEROES;
-	hero: Hero{
-		id: 1,
-		name: 'WindStorm'
+	hero = new Hero();
+	heroes: Hero[];
+	constructor(private heroService: HeroService){ }
+	initHeroes(): void{
+		this.heroes = this.heroService.getHeros();
+	}
+	ngOnInit(): void{
+		this.initHeroes();
 	}
 	onSelect(hero: Hero): void{
 		this.hero = hero;
